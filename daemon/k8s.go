@@ -430,7 +430,7 @@ func (k *k8s) clean() error {
 			continue
 		}
 
-		if time.Now().Sub(*item.deletionTime) > storageCleanTimeout {
+		if time.Since(*item.deletionTime) > storageCleanTimeout {
 			if err := k.storage.Delete(key); err != nil {
 				return errors.Wrap(err, "error delete storage")
 			}
